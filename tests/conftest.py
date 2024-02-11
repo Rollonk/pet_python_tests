@@ -31,7 +31,5 @@ def browser_management():
     browser.config.browser_name = 'chrome'  # or 'firefox' or 'edge' or 'opera'
     browser.config.window_width = 1080
     browser.config.window_height = 1920
-    print("Открыта страница браузера нужного размера")
     yield
     browser.quit()
-    print("Браузер закрыт")
