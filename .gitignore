@@ -147,10 +147,13 @@ dmypy.json
 .pyre/
 
 # pytype static type analyzer
-.pytype/
+.pytype/фддгку
 
 # Cython debug symbols
 cython_debug/
+
+# Allure
+allure-results
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
