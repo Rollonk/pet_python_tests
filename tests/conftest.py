@@ -1,7 +1,8 @@
 import pytest
 from selene.support.shared import browser
 
-# browser.config.base_url = 'https://demoqa.com'
+browser.config.base_url = 'https://demoqa.com'
+
 
 @pytest.fixture()
 def window_size():
@@ -24,13 +25,9 @@ def open_browser_for_form(window_size):
     browser.execute_script('document.querySelector("#RightSide_Advertisement").remove()')
 
 
-browser.config.base_url = 'https://demoqa.com'
-
-
 @pytest.fixture(scope='function', autouse=True)
 def browser_management():
     browser.config.timeout = 3
-
     browser.config.browser_name = 'chrome'  # or 'firefox' or 'edge' or 'opera'
     browser.config.window_width = 1080
     browser.config.window_height = 1920
@@ -38,5 +35,3 @@ def browser_management():
     yield
     browser.quit()
     print("Браузер закрыт")
-
-

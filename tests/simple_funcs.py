@@ -21,4 +21,3 @@ if __name__ == '__main__':
     open_browser(browser_name="qa.guru")
     go_to_company_name_homepage(page_url="https://qa.guru")
     find_registration_button_on_login_page(page_url="https://qa.guru", button_text="Личный кабинет")
-
