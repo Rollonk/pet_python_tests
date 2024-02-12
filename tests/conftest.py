@@ -3,8 +3,8 @@ from selene.support.shared import browser
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 #  для безголового режима:
-# options = webdriver.ChromeOptions()
-# options.add_argument('--headless')
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
 
 browser.config.base_url = 'https://demoqa.com'
 
@@ -35,23 +35,23 @@ def open_browser_for_form(window_size):
 @pytest.fixture(scope='function', autouse=True)
 def browser_management():
     #  для безголового режима:
-    # browser.config.driver_options = options
+    browser.config.driver_options = options
 
     # для селеноида:
-    options = Options()
-    selenoid_capabilities = {
-        "browserName": "chrome",
-        "browserVersion": "100.0",
-        "selenoid:options": {
-            "enableVNC": True,
-            "enableVideo": True
-        }
-    }
-    options.capabilities.update(selenoid_capabilities)
-    driver = webdriver.Remote(
-        command_executor="http://localhost:4444/wd/hub",
-        options=options)
-    browser.config.driver = driver
+    # options = Options()
+    # selenoid_capabilities = {
+    #     "browserName": "chrome",
+    #     "browserVersion": "100.0",
+    #     "selenoid:options": {
+    #         "enableVNC": True,
+    #         "enableVideo": True
+    #     }
+    # }
+    # options.capabilities.update(selenoid_capabilities)
+    # driver = webdriver.Remote(
+    #     command_executor="http://localhost:4444/wd/hub",
+    #     options=options)
+    # browser.config.driver = driver
 
     browser.config.timeout = 3
     browser.config.browser_name = 'chrome'  # or 'firefox' or 'edge' or 'opera'
