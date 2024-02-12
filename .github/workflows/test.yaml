@@ -73,6 +73,8 @@ jobs:
     needs: download-history
 
     steps:
+      - name: Start selenoid
+        uses: Xotabu4/selenoid-github-action@v2
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: setup Python
