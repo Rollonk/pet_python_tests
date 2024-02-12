@@ -53,15 +53,11 @@ jobs:
           -H "X-GitHub-Api-Version: 2022-11-28" 
           https://api.github.com/repos/Rollonk/pet_python_tests/actions/artifacts/$REPORT_ID/zip 
           -o pages.zip
-        continue-on-error: true
       - run: mkdir allure-results && unzip artifacts.zip -d allure-results
-        continue-on-error: true
       - run: mkdir old_pages pages_history && unzip pages.zip -d old_pages && tar -xvf old_pages/artifact.tar -C pages_history
-        continue-on-error: true
       - run: cp pages_history/history/* allure-results && cp -r pages_history/history allure-results
-        continue-on-error: true
       - name: Store allure history
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: allure-results
           path:
@@ -98,7 +94,7 @@ jobs:
         run: pytest --alluredir=allure-results
         continue-on-error: true
       - name: Store allure results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: allure-results
           path:
@@ -119,7 +115,7 @@ jobs:
         uses: actions/download-artifact@v3
       - run: allure generate -c allure-results -o _site
       - name: Store generated report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: _site
           path:
@@ -138,3 +134,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1.2.9
+
