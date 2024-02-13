@@ -2,6 +2,9 @@ import pytest
 from selene.support.shared import browser
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
+
+from demo_qa_tests.utils import allure_attachment
+
 #  для безголового режима:
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -58,4 +61,8 @@ def browser_management():
     browser.config.window_width = 1080
     browser.config.window_height = 1920
     yield
+    allure_attachment.add_html(browser)
+    allure_attachment.add_screenshot(browser)
+    allure_attachment.add_logs(browser)
+    allure_attachment.add_video(browser)
     browser.quit()
