@@ -38,7 +38,7 @@ def open_browser_for_form(window_size):
 @pytest.fixture(scope='function', autouse=True)
 def browser_management():
     #  для безголового режима:
-    browser.config.driver_options = options
+    # browser.config.driver_options = options
 
     # для селеноида:
     # options = Options()
@@ -61,8 +61,8 @@ def browser_management():
     browser.config.window_width = 1080
     browser.config.window_height = 1920
     yield
-    allure_attachment.add_html(browser)
+    # allure_attachment.add_html(browser)
     allure_attachment.add_screenshot(browser)
     allure_attachment.add_logs(browser)
-    allure_attachment.add_video(browser)
+    # allure_attachment.add_video(browser)
     browser.quit()
