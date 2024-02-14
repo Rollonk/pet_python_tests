@@ -144,9 +144,9 @@ jobs:
       - name: success
         if: needs.test.outputs.first_test != 'failure' && needs.test.outputs.second_test != 'failure' && needs.test.outputs.all != 'failure'
         run: |
-            curl --location 'https://api.telegram.org/bot${{ secrets.TG }}/sendMessage' --header 'Content-Type: application/json' --data '{"chat_id": 6144359989, "text": "✅ Tests passed. Report: https://rollonk.github.io/pet_python_tests/"}'
+            curl --location 'https://api.telegram.org/bot${{ secrets.TG }}/sendMessage' --header 'Content-Type: application/json' --data '{"chat_id": -1002097549979, "text": "✅ Tests passed. Report: https://rollonk.github.io/pet_python_tests/"}'
       - name: failure
         if: needs.test.outputs.first_test == 'failure' || needs.test.outputs.second_test == 'failure' || needs.test.outputs.all == 'failure'
         run: |
-            curl --location 'https://api.telegram.org/bot${{ secrets.TG }}/sendMessage' --header 'Content-Type: application/json' --data '{"chat_id": 6144359989, "text": "🚫 Tests FAILED. Report: https://rollonk.github.io/pet_python_tests/"}'
+            curl --location 'https://api.telegram.org/bot${{ secrets.TG }}/sendMessage' --header 'Content-Type: application/json' --data '{"chat_id": -1002097549979, "text": "🚫 Tests FAILED. Report: https://rollonk.github.io/pet_python_tests/"}'
 
