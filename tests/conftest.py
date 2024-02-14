@@ -56,7 +56,7 @@ def browser_management():
     #     options=options)
     # browser.config.driver = driver
 
-    browser.config.timeout = 3
+    browser.config.timeout = 5
     browser.config.browser_name = 'chrome'  # or 'firefox' or 'edge' or 'opera'
     browser.config.window_width = 1080
     browser.config.window_height = 1920

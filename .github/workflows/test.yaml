@@ -71,7 +71,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: download-history
-
+    outputs:
+      good: ${{ steps.first_test.outcome }}
+      bad: ${{ steps.second_test.outcome }}
+      all: ${{ steps.all.outcome }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -138,4 +141,12 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1.2.9
+      - name: success
+        if: needs.test.outputs.first_test != 'failure' && needs.test.outputs.second_test != 'failure' && needs.test.outputs.all != 'failure'
+        run: |
+            curl --location 'https://api.telegram.org/bot${{ secrets.TG }}/sendMessage' --header 'Content-Type: application/json' --data '{"chat_id": 6144359989, "text": "✅ Tests passed. Report: https://rollonk.github.io/pet_python_tests/"}'
+      - name: failure
+        if: needs.test.outputs.first_test == 'failure' || needs.test.outputs.second_test == 'failure' || needs.test.outputs.all == 'failure'
+        run: |
+            curl --location 'https://api.telegram.org/bot${{ secrets.TG }}/sendMessage' --header 'Content-Type: application/json' --data '{"chat_id": 6144359989, "text": "🚫 Tests FAILED. Report: https://rollonk.github.io/pet_python_tests/"}'
 
