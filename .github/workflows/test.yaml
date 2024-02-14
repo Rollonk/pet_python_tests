@@ -94,7 +94,7 @@ jobs:
         continue-on-error: true
       - name: find_selene
         if: "github.event.inputs.deployment_target == 'find_selene'"
-        run: pytest tests/test_google_should_find_selene.py::find_selene --alluredir=allure-results
+        run: pytest tests/test_google_should_find_selene.py::test_find_selene --alluredir=allure-results
         continue-on-error: true
       - name: all
         if: "github.event.inputs.deployment_target == 'all'"

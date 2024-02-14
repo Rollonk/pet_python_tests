@@ -11,7 +11,7 @@ from demo_qa_tests.utils import allure_attachment
 @allure.feature("Using Google")
 @allure.story('User find info about Selene')
 @allure.link('https://google.com', name='Testing Google')
-def find_selene(open_browser_for_find):
+def test_find_selene(open_browser_for_find):
     with allure.step("Ввести в поисковую строку запрос: 'yashaka/selene' и нажать энтер"):
         allure_attachment.add_screenshot(browser)
         browser.element('[name="q"]').should(be.blank).type('yashaka/selene').press_enter()
