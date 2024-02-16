@@ -98,7 +98,7 @@ jobs:
         continue-on-error: true
       - name: all
         if: "github.event.inputs.deployment_target == 'all'"
-        run: pytest --alluredir=allure-results
+        run: pytest --alluredir=allure-results --run_type=remote -n 2
         continue-on-error: true
       - name: Store allure results
         uses: actions/upload-artifact@v3

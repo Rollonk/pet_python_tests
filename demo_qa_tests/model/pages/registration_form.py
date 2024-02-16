@@ -1,13 +1,11 @@
 import allure
 from selene import have
 from selene.support.shared import browser
-
 from demo_qa_tests.model.controls.dropdown import dropdown_react
 from demo_qa_tests.model.controls.chekboxes import select_checkbox
 from demo_qa_tests.model.controls.select_dates_on_the_calendar import select_dates_on_the_calendar
 from demo_qa_tests.model.controls.radio_button import select_radio
 from demo_qa_tests.utils import allure_attachment
-
 from demo_qa_tests.utils.files_tools import path_file
 
 
@@ -15,6 +13,7 @@ from demo_qa_tests.utils.files_tools import path_file
 def open_practise_form():
     browser.open('/automation-practice-form')
     allure_attachment.add_screenshot(browser)
+
 
 @allure.step("Заполнить форму регистрации")
 def data_fill(first_name, last_name, user_email, gender, number,  file, year, month,
@@ -33,10 +32,12 @@ def data_fill(first_name, last_name, user_email, gender, number,  file, year, mo
     browser.element('#currentAddress').type(address)
     allure_attachment.add_screenshot(browser)
 
+
 @allure.step("Нажать кнопку подтвердить")
 def send_form():
     browser.element('#submit').press_enter()
     allure_attachment.add_screenshot(browser)
+
 
 @allure.step("Проверить итоговые данные в модальном окне после регистрации")
 def check_get_form(first_name, last_name, user_email, gender, number, file, date, subjects,
@@ -52,6 +53,7 @@ def check_get_form(first_name, last_name, user_email, gender, number, file, date
     browser.all('.table-responsive').all('tr').element(9).should(have.text(address))
     browser.all('.table-responsive').all('tr').element(10).should(have.text(f'{state} {city}'))
     allure_attachment.add_screenshot(browser)
+
 
 @allure.step("Закрыть форму регистрации")
 def close_form():
