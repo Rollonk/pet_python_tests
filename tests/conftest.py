@@ -55,10 +55,15 @@ def pytest_sessionfinish(session: pytest.Session):
     resulting_message = f"Total tests run: {tests_collected}. Failed: {tests_failed}.\n"
     lucky_text = f"✅ All tests were successful\n{link_message}"
     failed_text = f"🚫 {resulting_message}{link_message}"
-    local_text = f"🧐 {resulting_message}Это сообщение о завершении локального запуска"
+    # local_text = f"🧐 {resulting_message}Это сообщение о завершении локального запуска"
     # пример строки удаленного запуска:
     # 'pytest --alluredir=allure-results --run_type=remote -n 2'
-    if 'remote' in session.config.args[0]:
+    args = session.config.args[0]
+    local_text = f"🧐 {args}Это сообщение о завершении локального запуска"
+    args_bool = '--run_type=remote' in args
+    # print(args_bool)
+    if args_bool:
+    # if session.config.args[0] == 'pytest --alluredir=allure-results --run_type=remote -n 2':
         if tests_failed == 0:
             send_telegram_resulting_message(telegram_url, telegram_chat_id, lucky_text)
         else:
