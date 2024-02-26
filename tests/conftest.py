@@ -47,14 +47,14 @@ def pytest_runtest_call(item: pytest.Item):
 
 def pytest_sessionfinish(session: pytest.Session):
     """Resulting message in telegram chat"""
-    tests_collected = str(session.testscollected)
-    tests_failed = str(session.testsfailed)
+    # tests_collected = str(session.testscollected)
+    # tests_failed = str(session.testsfailed)
     telegram_url = "https://api.telegram.org/bot6879650976:AAEDTmYStwt8UNUnEpRPQbtGDskL9qEikic/sendMessage"
     telegram_chat_id = -1002097549979
     link_message = "Ссылка отчет придет после публикации"
-    resulting_message = f"Total tests run: {tests_collected}. Failed: {tests_failed}.\n"
-    lucky_text = f"✅ All tests were successful\n{link_message}"
-    failed_text = f"🚫 {tests_failed}{link_message}"
+    resulting_message = f"Total tests run: {session.testscollected}. Failed: {session.testsfailed}.\n"
+    lucky_text = f"✅ All tests were successful\n{resulting_message}\n{link_message}"
+    failed_text = f"🚫 {resulting_message}{link_message}"
     # local_text = f"🧐 {resulting_message}Это сообщение о завершении локального запуска"
     # пример строки удаленного запуска:
     # 'pytest --alluredir=allure-results --run_type=remote -n 2'
@@ -62,10 +62,7 @@ def pytest_sessionfinish(session: pytest.Session):
     local_text = f"🧐 {args}Это сообщение о завершении локального запуска"
     args_bool = 'work' in args
     if args_bool:
-        if tests_failed == 0:
-            send_telegram_resulting_message(telegram_url, telegram_chat_id, lucky_text)
-        else:
-            send_telegram_resulting_message(telegram_url, telegram_chat_id, failed_text)
+        send_telegram_resulting_message(telegram_url, telegram_chat_id, resulting_message)
     else:
         send_telegram_resulting_message(telegram_url, telegram_chat_id, local_text)
 
