@@ -60,7 +60,7 @@ def pytest_sessionfinish(session: pytest.Session):
     # 'pytest --alluredir=allure-results --run_type=remote -n 2'
     args = session.config.args[0]
     local_text = f"🧐 {args}Это сообщение о завершении локального запуска"
-    args_bool = '--run_type=remote' in args
+    args_bool = 'work' in args
     # print(args_bool)
     if args_bool:
     # if session.config.args[0] == 'pytest --alluredir=allure-results --run_type=remote -n 2':
