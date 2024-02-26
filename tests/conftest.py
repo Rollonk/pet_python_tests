@@ -45,7 +45,7 @@ def pytest_runtest_call(item: pytest.Item):
     allure.dynamic.title(" ".join(item.name.split("_")[1:]).capitalize())
 
 
-def pytest_sessionfinish(session: pytest.Session, exitstatus: ):
+def pytest_sessionfinish(session: pytest.Session):
     """Resulting message in telegram chat"""
     tests_collected = str(session.testscollected)
     tests_failed = str(session.testsfailed)
